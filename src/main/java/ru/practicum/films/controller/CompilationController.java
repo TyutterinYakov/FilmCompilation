@@ -44,12 +44,10 @@ public class CompilationController {
     }
 
     @GetMapping("/collections/films")
-    @Operation(summary = "Получение подборок, в которое входят перечисленные фильмы")
-    @io.swagger.v3.oas.annotations.parameters.RequestBody(description = "Список идентификаторов фильмов", content =
-    @Content(mediaType = "application/json", schema = @Schema(implementation = FilmsDto.class)))
-    @ApiResponse(responseCode = "200", description = "Описание фильмов",
-            content = @Content(array = @ArraySchema(schema = @Schema(implementation = FilmDto.class))))
-    public List<CompilationDto> getAllByFilms(@RequestBody FilmsDto filmsDto) {
-        return CompilationMapper.toDto(compilationService.getAll(filmsDto.getFilmIds()));
+    @Operation(summary = "Получение подборок, в которые входят перечисленные фильмы")
+    @ApiResponse(responseCode = "200", description = "Список подборок",
+            content = @Content(array = @ArraySchema(schema = @Schema(implementation = CompilationDto.class))))
+    public List<CompilationDto> getAllByFilms(@RequestParam Set<Long> filmIds) {
+        return CompilationMapper.toDto(compilationService.getAll(filmIds));
     }
 }

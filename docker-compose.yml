@@ -2,22 +2,7 @@ services:
 
   compilations_films:
     build: ./
+    image: film-compilation
     container_name: compilations_films
     ports:
       - "8080:8080"
-    depends_on:
-      - films-db
-    environment:
-      - SPRING_DATASOURCE_URL=jdbc:postgresql://films-db:5432/films-db
-      - SPRING_DATASOURCE_USERNAME=root
-      - SPRING_DATASOURCE_PASSWORD=root
-
-  films-db:
-    image: postgres:14-alpine
-    container_name: postgres-films-db
-    environment:
-      - POSTGRES_USER=root
-      - POSTGRES_PASSWORD=root
-      - POSTGRES_DB=films-db
-    ports:
-      - 5432:5432

@@ -1,0 +1,9 @@
+include:
+  - project: 'faculties/tests/ci-templates'
+    file: '/trainer-image.yml'
+
+variables:
+  IMAGE: "film-compilation"
+
+before_script:
+  - echo $IMAGE
